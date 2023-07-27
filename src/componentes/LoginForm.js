@@ -1,15 +1,8 @@
-import React, { useRef,useState } from 'react';
-import { useDispatch } from "react-redux"
-import { addUser } from '../features/userSlice';
-import { MessageOk } from './MessageOk'
-import { MessageError } from './MessageError'
+import React, { useRef } from 'react';
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const usernameRef = useRef();
   const passwordRef = useRef();
-  const dispatch = useDispatch();
-
-
 
   const handleSubmit = (e) => {
 
@@ -22,10 +15,10 @@ const RegisterForm = () => {
 
     let objUsuario = {
       usuario: usuario,
-      password: password,
+      password: password
   };
 
-    fetch('https://censo.develotion.com/usuarios.php', {
+    fetch('https://censo.develotion.com/login.php', {
       method: 'POST',
       body: JSON.stringify(objUsuario),
       headers: {
@@ -36,14 +29,7 @@ const RegisterForm = () => {
       .then((json) => {
           console.log(json);
           if(json.codigo === 200){
-            // Enviar los datos al estado usando dispatch
-            dispatch(addUser({ id:json.id, usuario, password }))
-            setIsRegistered(true);
-          }else if(json.codigo === 409){
-            setRepeatedUser(true);
-          }
-          else if(json.codigo === 404){
-            setBrongUser(true);
+           console.log(json)
           }
       });
 
@@ -54,25 +40,35 @@ const RegisterForm = () => {
 
   return (
     <div>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input type="text" id="username" ref={usernameRef} required />
+      <div class="container">
+        <div class="screen">
+          <div class="screen__content">
+            <form onSubmit={handleSubmit} class="login">
+              <div class="login__field">
+                <i class="login__icon fas fa-user"></i>
+                <input type="text" class="login__input"  ref={usernameRef}  placeholder="User name"/>
+              </div>
+              <div class="login__field">
+                <i class="login__icon fas fa-lock"></i>
+                <input type="password" class="login__input" ref={passwordRef} placeholder="Password"/>
+              </div>
+              <button class="button login__submit">
+                <span class="button__text">Login</span>
+                <i class="button__icon fas fa-chevron-right"></i>
+              </button>				
+            </form>
+          </div>
+          <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>		
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+          </div>		
+        </div>
       </div>
-
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" ref={passwordRef} required />
-      </div>
-      <button type="submit">Register</button>
-
-    </form>
-      {isRegistered && <MessageOk texto='Registro realizado con éxito'></MessageOk>}
-      {repeatedUser && <MessageError texto='Usuario Duplicado'></MessageError>}
-      {brongUser && <MessageError texto='Debe proporcionar usuario y contraseña'></MessageError>}
-
+    
     </div>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;
