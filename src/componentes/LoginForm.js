@@ -1,8 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom'
+import { MessageError } from "./MessageError";
 
 const LoginForm = () => {
   const usernameRef = useRef();
   const passwordRef = useRef();
+
+  const window = useNavigate()
+  
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
 
@@ -29,7 +35,12 @@ const LoginForm = () => {
       .then((json) => {
           console.log(json);
           if(json.codigo === 200){
+            localStorage.setItem('session', json.apiKey)
+            window("/home")
            console.log(json)
+          }else{
+            localStorage.clear()
+            setError(`${json.mensaje}`);
           }
       });
 
@@ -39,35 +50,36 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
-      <div class="container">
-        <div class="screen">
-          <div class="screen__content">
-            <form onSubmit={handleSubmit} class="login">
-              <div class="login__field">
-                <i class="login__icon fas fa-user"></i>
-                <input type="text" class="login__input"  ref={usernameRef}  placeholder="User name"/>
-              </div>
-              <div class="login__field">
-                <i class="login__icon fas fa-lock"></i>
-                <input type="password" class="login__input" ref={passwordRef} placeholder="Password"/>
-              </div>
-              <button class="button login__submit">
-                <span class="button__text">Login</span>
-                <i class="button__icon fas fa-chevron-right"></i>
-              </button>				
-            </form>
-          </div>
-          <div class="screen__background">
-            <span class="screen__background__shape screen__background__shape4"></span>
-            <span class="screen__background__shape screen__background__shape3"></span>		
-            <span class="screen__background__shape screen__background__shape2"></span>
-            <span class="screen__background__shape screen__background__shape1"></span>
-          </div>		
-        </div>
+    <div className="wrapper fadeInDown">
+    <div id="formContent">
+      <h2 className="active"> Sign In </h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          id="login"
+          className="fadeIn second inputs"
+          name="login"
+          ref={usernameRef}
+          placeholder="username"
+        />
+        <input
+          type="password"
+          id="password"
+          className="fadeIn third inputs"
+          name="login"
+          ref={passwordRef}
+          placeholder="password"
+        />
+        <input type="submit" className="fadeIn fourth" value="Log In" />
+      </form>
+      {error && <MessageError texto={error}></MessageError>}
+      <div id="formFooter">
+        <Link className="underlineHover" to='/register'>
+          Registro?
+        </Link>
       </div>
-    
     </div>
+  </div>
   );
 };
 

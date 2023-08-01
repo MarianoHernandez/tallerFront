@@ -4,7 +4,12 @@ import { store } from './store/store'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RegisterForm from './componentes/RegisterForm';
 import LoginForm from './componentes/LoginForm';
-import { store } from "./store/store";
+import { NotFound } from './componentes/NotFound';
+import { Contenedor } from './componentes/Contenedor';
+import { PersonaCensada } from './componentes/PersonaCensada';
+import { ListadoPersona } from './componentes/ListadoPersona';
+import { Totales } from './componentes/Totales';
+import { Analisis } from './componentes/Analisis';
 
 function App() {
   return (
@@ -12,18 +17,18 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-              <Route path="/login" element={<LoginForm />}></Route>
-              <Route path="/registro" element={<RegisterForm />}></Route>
-              <Route path="/logout" element={<Contacto />}></Route>
-              {/* <Route path="/dashboard" element={<Analisis />}>
-                <Route path='/agregar'></Route>  
-                <Route path='/listadopersona'></Route>  //Filtro
-                <Route path='/totale'></Route>  
-              </Route> */}
-              <Route path="*" element={<NoEncontrado />}></Route>
+              <Route index path="/" element={<LoginForm />}></Route>
+              <Route path="/register" element={<RegisterForm />}></Route>
+              <Route path="/logout"></Route>
+              <Route path='/home' element={<Contenedor />}>
+                <Route path='/home/analisis' element={<Analisis/>} ></Route>
+                <Route path='/home/agregarcensada' element={<PersonaCensada/>} ></Route>
+                <Route path='/home/listado' element={<ListadoPersona/>} ></Route>
+                <Route path='/home/totales' element={<Totales/>} ></Route>
+              </Route>
+              <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </BrowserRouter>
-
       </Provider>
     </div>
   );
