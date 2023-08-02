@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import { MessageError } from "./MessageError";
 
@@ -7,7 +7,10 @@ const LoginForm = () => {
   const passwordRef = useRef();
 
   const window = useNavigate()
-  
+
+  useEffect(()=>{
+    localStorage.clear() 
+  })
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
@@ -36,6 +39,7 @@ const LoginForm = () => {
           console.log(json);
           if(json.codigo === 200){
             localStorage.setItem('session', json.apiKey)
+            localStorage.setItem('id', json.id)
             window("/home")
            console.log(json)
           }else{

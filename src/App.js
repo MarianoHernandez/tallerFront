@@ -11,6 +11,7 @@ import { ListadoPersona } from './componentes/ListadoPersona';
 import { Totales } from './componentes/Totales';
 import { Analisis } from './componentes/Analisis';
 
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
         <BrowserRouter>
           <Routes>
               <Route index path="/" element={<LoginForm />}></Route>
+              <Route index path="/index.html" element={<LoginForm />}></Route>
               <Route path="/register" element={<RegisterForm />}></Route>
               <Route path="/logout"></Route>
               <Route path='/home' element={<Contenedor />}>
