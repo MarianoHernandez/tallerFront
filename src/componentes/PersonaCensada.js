@@ -1,7 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import toast, { Toaster } from 'react-hot-toast';
+import { addPeople } from "../features/peopleSlice";
 
 export const PersonaCensada = () => {
+
+  const dispatch = useDispatch();
+  const [peopleNew, setPeopleNew] = useState([]);
 
   const apiKey = localStorage.getItem('session');
   const id = localStorage.getItem('id');
@@ -9,6 +15,7 @@ export const PersonaCensada = () => {
   const countrys = useSelector(state => state.country.countrys);
   const citys = useSelector(state => state.city.citys);
   const jobs = useSelector(state => state.job.jobs);
+  const people = useSelector(state => state.people.peoples);
 
   const nameRef = useRef();
   const countryRef = useRef();
@@ -26,6 +33,10 @@ export const PersonaCensada = () => {
     const filteredCities = citys.filter(city => city.idDepartamento === idDepartamento);
     setFilteredCities(filteredCities);
   }, [idDepartamento, citys]);
+
+  useEffect(() => {
+    setPeopleNew(people) 
+  }, [people]);
 
   const calculateAge = (birthdate) => {
     const today = new Date();
@@ -82,10 +93,21 @@ export const PersonaCensada = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
+        if(json.codigo ===200){
+          toast.success(`${json.mensaje}`)
+          dispatch(addPeople({ id: json.id,...objPeople}));
+
+        }else{
+          toast.error(`${json.mensaje}`)
+        }
       });
 
     // Limpiar el formulario después del envío
+    nameRef.current.value='';
+    dateRef.current.value='';
+    jobRef.current.value='';
+    cityRef.current.value='';
+    countryRef.current.value='';
 
   };
   return (
@@ -129,6 +151,8 @@ export const PersonaCensada = () => {
         </select>
         <input type="submit" value="Register" />
       </form>
+      <Toaster />
+
     </div>
   );
 }

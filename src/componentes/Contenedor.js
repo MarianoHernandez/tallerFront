@@ -10,6 +10,7 @@ import { savecity } from "../features/citySlice";
 import { savecountry } from "../features/countrySlice";
 import { savejob } from "../features/jobSlice";
 import { useDispatch } from "react-redux";
+import { savepeople } from "../features/peopleSlice";
 
 
 export const Contenedor = () => {
@@ -67,6 +68,23 @@ export const Contenedor = () => {
       });
   }
 
+  const getPeople = () => {
+    const url = 'https://censo.develotion.com/personas.php?idUsuario='+`${id}`
+    console.log(url);
+    fetch(url, {
+      method: 'GET',
+      headers: {
+          'Content-type': 'application/json',
+          'apikey':apiKey,
+          'iduser':id
+      },
+  })
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch(savepeople(json.personas))
+      });
+  }
+
 
   useEffect(() => {
     if (localStorage.getItem("session") === null) {
@@ -75,9 +93,9 @@ export const Contenedor = () => {
       getCitys();
       getCountry();          
       getJobs();
-
+      getPeople();
     }
-  },[]);
+  });
 
   return (
     <div className="navbar">
