@@ -47,7 +47,6 @@ export const Contenedor = () => {
   })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json)
         dispatch(savecountry(json.departamentos))
       });
   }
@@ -63,7 +62,6 @@ export const Contenedor = () => {
   })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json)
         dispatch(savejob(json.ocupaciones))
       });
   }

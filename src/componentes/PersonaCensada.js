@@ -34,6 +34,7 @@ export const PersonaCensada = () => {
     setFilteredCities(filteredCities);
   }, [idDepartamento, citys]);
 
+
   useEffect(() => {
     setPeopleNew(people) 
   }, [people]);
@@ -142,7 +143,7 @@ export const PersonaCensada = () => {
           {jobs.map(job => (
             <option
               key={job.id}
-              value={job.ocupacion}
+              value={job.id}
               disabled={calculateAge(dateOfBirth) < 18 && job.ocupacion !== "Estudiante"}
             >
               {job.ocupacion}

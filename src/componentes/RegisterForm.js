@@ -36,7 +36,6 @@ const RegisterForm = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         if (json.codigo === 200) {
           // Enviar los datos al estado usando dispatch
           dispatch(addUser({ id: json.id, usuario, password }));
