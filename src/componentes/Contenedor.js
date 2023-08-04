@@ -67,7 +67,7 @@ export const Contenedor = () => {
   }
 
   const getPeople = () => {
-    const url = 'https://censo.develotion.com/personas.php?idUsuario='+`${id}`
+    const url = `https://censo.develotion.com/personas.php?idUsuario=${id}`
     console.log(url);
     fetch(url, {
       method: 'GET',
@@ -79,6 +79,7 @@ export const Contenedor = () => {
   })
       .then((response) => response.json())
       .then((json) => {
+        console.log('personas',json.personas)
         dispatch(savepeople(json.personas))
       });
   }
@@ -88,12 +89,13 @@ export const Contenedor = () => {
     if (localStorage.getItem("session") === null) {
       windows("/");
     }else{
+      console.log('acaaaa')
       getCitys();
       getCountry();          
       getJobs();
       getPeople();
     }
-  });
+  },[]);
 
   return (
     <div className="navbar">

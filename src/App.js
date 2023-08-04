@@ -10,6 +10,8 @@ import { PersonaCensada } from './componentes/PersonaCensada';
 import { ListadoPersona } from './componentes/ListadoPersona';
 import { Totales } from './componentes/Totales';
 import { Analisis } from './componentes/Analisis';
+import { BorrarCenso } from './componentes/BorrarCenso';
+//import "./bootstrap.min.css";
 
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
                 <Route path='/home/agregarcensada' element={<PersonaCensada/>} ></Route>
                 <Route path='/home/listado' element={<ListadoPersona/>} ></Route>
                 <Route path='/home/totales' element={<Totales/>} ></Route>
+                <Route path='/home/borrarCenso' element={<BorrarCenso/>} ></Route>
               </Route>
               <Route path="*" element={<NotFound />}></Route>
           </Routes>

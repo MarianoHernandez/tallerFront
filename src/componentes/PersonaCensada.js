@@ -77,10 +77,10 @@ export const PersonaCensada = () => {
     let objPeople = {
       idUsuario: id,
       nombre: name,
-      departamento: country,
-      ciudad: city,
+      departamento: +country,
+      ciudad: +city,
       fechaNacimiento: date,
-      ocupacion: job
+      ocupacion: +job
     };
 
     fetch("https://censo.develotion.com/personas.php", {
@@ -95,8 +95,9 @@ export const PersonaCensada = () => {
       .then((response) => response.json())
       .then((json) => {
         if(json.codigo ===200){
+          console.log(json)
           toast.success(`${json.mensaje}`)
-          dispatch(addPeople({ id: json.id,...objPeople}));
+          dispatch(addPeople({ id: json.idCenso,...objPeople}));
 
         }else{
           toast.error(`${json.mensaje}`)

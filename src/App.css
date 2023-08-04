@@ -5,14 +5,6 @@
 body {
   background-color: #42ccd6;
   font-family: "Poppins", sans-serif;
-  height: 100vh;
-}
-
-a {
-  color: #92badd;
-  display: inline-block;
-  text-decoration: none;
-  font-weight: 400;
 }
 
 h2 {
@@ -34,18 +26,7 @@ h2 {
   width: 100%;
   height: 100%;
 }
-.Conteiner {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
 
-.fondoLogin {
-  width: 100%;
-  height: 100%;
-  background-color: #56baed;
-  flex: 1;
-}
 .wrapper {
   background-color: #56baed;
   display: flex;
@@ -397,55 +378,121 @@ ul {
   flex-direction: column;
 }
 
+.cuerpoTotales{
+  margin-top: 20px;
+  background-color: white;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+}
+
+.borrarBody{
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+}
+.botonesBorrar{
+  display: flex;
+  color: white;
+}
+
+.centrarBorrarBody{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.borrarTitulo{
+  display: flex;
+  justify-content: center;
+}
+.botonBorrar{
+  width: 100%;
+  background-color: red;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: medium;
+  text-align: center;
+}
+
+.botonBorrar:hover{
+  background-color: brown;
+}
 
 .card {
-  --border-radius: 0.75rem;
-  width: 210px;
   font-family: "Arial";
   padding: 1rem;
   cursor: pointer;
-  border-radius: var(--border-radius);
+  border-radius: 25px;
   background: #f1f1f3;
   box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
-  position: relative;
   margin-bottom: 15px;
 }
-.card .card__content {
-  color: var(--secondary-color);
+.card .card_content {
   font-size: 0.86rem;
 }
 
-.card .card__title {
+.card .card_title {
   padding: 0;
   font-size: 1.3rem;
   font-weight: bold;
+  border-bottom: 2px solid #39ace7  ;
 }
-.card__arrow{
-  color: white;
-}
-.card .card__date {
+
+.card .card_date {
   color: #6e6b80;
   font-size: 0.8rem;
 }
 
-.card .card__arrow {
-  position: absolute;
+.card .card_arrow {
   background: red;
   padding: 0.4rem;
-  border-top-left-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
-  bottom: 0;
-  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  margin-top: 10px;
 }
 
-
-.card:hover .card__arrow {
-  background: #111;
+.totalCensados{
+ font-family: "Arial";
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 25px;
+  background: #f1f1f3;
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
+  margin-bottom: 15px;
+  text-align: center;
+  color: black;
+  font-weight: 600;
+  font-size: large;
+}
+.conteinerTotals{
+  display: flex;
+  justify-content: space-around;
+  
 }
 
-.card:hover .card__arrow svg {
-  transform: translateX(3px);
+.conteinerindividual{
+   font-family: "Arial";
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 25px;
+  background: #f1f1f3;
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
+  margin-bottom: 15px;
+  text-align: center;
+  color: black;
+  width: 100%;
+  font-weight: 600;
+  font-size: large;
 }
