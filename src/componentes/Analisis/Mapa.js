@@ -26,8 +26,6 @@ const Mapa = () => {
     });
     return (
         <div>
-                    {console.log(peopleCounts)}
-
             <MapContainer center={[-33, -56]} zoom={7} scrollWheelZoom={false} style={{ height: "400px", width: "100%" }}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

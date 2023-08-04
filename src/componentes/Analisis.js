@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PorDepartamento from './Analisis/PorDepartamento'
 import PorTrabajo from './Analisis/PorTrabajo'
 import CuentaRegresiva from './Analisis/TiempoRestante'
 import Porcentaje from './Analisis/Porcentaje'
 import Mapa from './Analisis/Mapa'
+import { useNavigate } from "react-router-dom";
+
 export const Analisis = () => {
+  const window = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("session") === null) {
+      window("/");
+    }
+  });
+  
   return (
     <div className='Conteiner'>
       <div>

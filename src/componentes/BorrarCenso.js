@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { savepeople } from "../features/peopleSlice";
@@ -11,6 +11,11 @@ export const BorrarCenso = () => {
   const window = useNavigate();
   let { state } = useLocation();
 
+  useEffect(() => {
+    if (localStorage.getItem("session") === null) {
+      window("/");
+    }
+  });
   
   const borrar = (e) => {
     e.preventDefault();
@@ -30,8 +35,7 @@ export const BorrarCenso = () => {
           window("/");
         }
         if (json.codigo === 200) {
-
-          dispatch(savepeople(people.filter(p => p.id !== state.id)))
+          dispatch(savepeople(people.filter((p) => p.id !== state.id)));
           window("/home/listado");
         }
       });

@@ -1,21 +1,21 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import { addPeople } from "../features/peopleSlice";
+import { useNavigate } from "react-router-dom";
 
 export const PersonaCensada = () => {
 
   const dispatch = useDispatch();
-  const [peopleNew, setPeopleNew] = useState([]);
+  const window = useNavigate();
 
-  const apiKey = localStorage.getItem('session');
-  const id = localStorage.getItem('id');
+  const apiKey = localStorage.getItem("session");
+  const id = localStorage.getItem("id");
 
-  const countrys = useSelector(state => state.country.countrys);
-  const citys = useSelector(state => state.city.citys);
-  const jobs = useSelector(state => state.job.jobs);
-  const people = useSelector(state => state.people.peoples);
+  const countrys = useSelector((state) => state.country.countrys);
+  const citys = useSelector((state) => state.city.citys);
+  const jobs = useSelector((state) => state.job.jobs);
 
   const nameRef = useRef();
   const countryRef = useRef();
@@ -23,28 +23,33 @@ export const PersonaCensada = () => {
   const dateRef = useRef();
   const jobRef = useRef();
 
-
   const [idDepartamento, setIdDepartamento] = useState(0);
   const [filteredCities, setFilteredCities] = useState([]);
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [selectedOccupation, setSelectedOccupation] = useState("");
+  
+  useEffect(() => {
+    if (localStorage.getItem("session") === null) {
+      window("/");
+    }
+  });
 
   useEffect(() => {
-    const filteredCities = citys.filter(city => city.idDepartamento === idDepartamento);
+    const filteredCities = citys.filter(
+      (city) => city.idDepartamento === idDepartamento
+    );
     setFilteredCities(filteredCities);
   }, [idDepartamento, citys]);
-
-
-  useEffect(() => {
-    setPeopleNew(people) 
-  }, [people]);
 
   const calculateAge = (birthdate) => {
     const today = new Date();
     const birthDate = new Date(birthdate);
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDifference = today.getMonth() - birthDate.getMonth();
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    if (
+      monthDifference < 0 ||
+      (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
       age--;
     }
     return age;
@@ -80,7 +85,7 @@ export const PersonaCensada = () => {
       departamento: +country,
       ciudad: +city,
       fechaNacimiento: date,
-      ocupacion: +job
+      ocupacion: +job,
     };
 
     fetch("https://censo.develotion.com/personas.php", {
@@ -88,48 +93,50 @@ export const PersonaCensada = () => {
       body: JSON.stringify(objPeople),
       headers: {
         "Content-type": "application/json",
-        'apikey':apiKey,
-        'iduser':id
+        apikey: apiKey,
+        iduser: id,
       },
     })
       .then((response) => response.json())
       .then((json) => {
-        if(json.codigo ===200){
-          console.log(json)
-          toast.success(`${json.mensaje}`)
-          dispatch(addPeople({ id: json.idCenso,...objPeople}));
-
-        }else{
-          toast.error(`${json.mensaje}`)
+        if (json.codigo === 200) {
+          toast.success(`${json.mensaje}`);
+          dispatch(addPeople({ id: json.idCenso, ...objPeople }));
+        } else {
+          toast.error(`${json.mensaje}`);
         }
       });
 
     // Limpiar el formulario después del envío
-    nameRef.current.value='';
-    dateRef.current.value='';
-    jobRef.current.value='';
-    cityRef.current.value='';
-    countryRef.current.value='';
-
+    nameRef.current.value = "";
+    dateRef.current.value = "";
+    jobRef.current.value = "";
+    cityRef.current.value = "";
+    countryRef.current.value = "";
   };
   return (
-    <div id='contenedorCensada'>
+    <div id="contenedorCensada">
       <h2 className="active"> Agrega a una persona </h2>
-      <form className='addPerson' onSubmit={handleSubmit}>
-        <input
-          required
-          type="text"
-          placeholder="Nombre"
-          ref={nameRef}
-        />
+      <form className="addPerson" onSubmit={handleSubmit}>
+        <input required type="text" placeholder="Nombre" ref={nameRef} />
         <select required onChange={departamentCambio} ref={countryRef}>
-          <option disabled value="" selected>Seleccione un departamento</option>
-          {countrys.map(cout => <option key={cout.id} value={cout.id}>{cout.nombre}</option>)}
+          <option disabled value="" selected>
+            Seleccione un departamento
+          </option>
+          {countrys.map((cout) => (
+            <option key={cout.id} value={cout.id}>
+              {cout.nombre}
+            </option>
+          ))}
         </select>
         <select required ref={cityRef}>
-          <option disabled value="" selected>Selecciona una ciudad</option>
-          {filteredCities.map(city => (
-            <option key={city.id} value={city.id}>{city.nombre}</option>
+          <option disabled value="" selected>
+            Selecciona una ciudad
+          </option>
+          {filteredCities.map((city) => (
+            <option key={city.id} value={city.id}>
+              {city.nombre}
+            </option>
           ))}
         </select>
         <input
@@ -139,13 +146,22 @@ export const PersonaCensada = () => {
           onChange={handleDateOfBirthChange}
           ref={dateRef}
         />
-        <select required value={selectedOccupation} onChange={handleOccupationChange} ref={jobRef}>
-          <option disabled value="" selected>Selecciona la ocupacion</option>
-          {jobs.map(job => (
+        <select
+          required
+          value={selectedOccupation}
+          onChange={handleOccupationChange}
+          ref={jobRef}
+        >
+          <option disabled value="" selected>
+            Selecciona la ocupacion
+          </option>
+          {jobs.map((job) => (
             <option
               key={job.id}
               value={job.id}
-              disabled={calculateAge(dateOfBirth) < 18 && job.ocupacion !== "Estudiante"}
+              disabled={
+                calculateAge(dateOfBirth) < 18 && job.ocupacion !== "Estudiante"
+              }
             >
               {job.ocupacion}
             </option>
@@ -154,12 +170,6 @@ export const PersonaCensada = () => {
         <input type="submit" value="Register" />
       </form>
       <Toaster />
-
     </div>
   );
-}
-
-
-
-
-
+};

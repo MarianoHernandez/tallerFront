@@ -40,7 +40,6 @@ export const PorDepartamento = () => {
     const countrys = useSelector(state => state.country.countrys);
 
     useEffect(() => {
-        console.log(countrys);
     }, [countrys]);
 
     const cityNames = countrys.map(city => city.nombre);
