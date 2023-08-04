@@ -37,15 +37,15 @@ export const options = {
 export const PorDepartamento = () => {
 
     const people = useSelector(state => state.people.peoples);
-    const cities = useSelector(state => state.city.citys);
+    const countrys = useSelector(state => state.country.countrys);
 
     useEffect(() => {
-        console.log(cities);
-    }, [cities]);
+        console.log(countrys);
+    }, [countrys]);
 
-    const cityNames = cities.map(city => city.nombre);
-    const peopleCounts = cities.map(city => {
-        const cityPeople = people.filter(person => person.ciudad === city.id);
+    const cityNames = countrys.map(city => city.nombre);
+    const peopleCounts = countrys.map(city => {
+        const cityPeople = people.filter(person => person.departamento === city.id);
         return cityPeople.length;
     });
 

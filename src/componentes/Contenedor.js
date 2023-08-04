@@ -47,6 +47,7 @@ export const Contenedor = () => {
   })
       .then((response) => response.json())
       .then((json) => {
+        console.log(json.departamentos)
         dispatch(savecountry(json.departamentos))
       });
   }
@@ -68,7 +69,6 @@ export const Contenedor = () => {
 
   const getPeople = () => {
     const url = `https://censo.develotion.com/personas.php?idUsuario=${id}`
-    console.log(url);
     fetch(url, {
       method: 'GET',
       headers: {
@@ -79,7 +79,6 @@ export const Contenedor = () => {
   })
       .then((response) => response.json())
       .then((json) => {
-        console.log('personas',json.personas)
         dispatch(savepeople(json.personas))
       });
   }

@@ -1,33 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Person } from "./People/Person";
-import { useDispatch, useSelector } from "react-redux";
-import { savepeople } from "../features/peopleSlice";
+import { useSelector } from "react-redux";
+
 
 export const ListadoPersona = () => {
-  const dispatch = useDispatch();
-  const apiKey = localStorage.getItem("session");
-  const id = localStorage.getItem("id");
   const people = useSelector((state) => state.people.peoples);
   const jobs = useSelector(state => state.job.jobs);
   const [job, setJob] = useState('todos');
   const [filteredPeople, setFilteredPeople] = useState([]);
-
-  const getPeople = () => {
-    const url =
-    `https://censo.develotion.com/personas.php?idUsuario=${id}`;
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        apikey: apiKey,
-        iduser: id,
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch(savepeople(json.personas));
-      });
-  };
 
   useEffect(() => {
     console.log(people)
@@ -40,9 +20,6 @@ export const ListadoPersona = () => {
 
   }, [job]);
 
-  useEffect(() => {
-    //getPeople();
-  }, []);
   const handleSelect = (event) =>{
     setJob(event.target.value);
   }
