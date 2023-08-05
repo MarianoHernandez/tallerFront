@@ -50,14 +50,14 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="wrapper fadeInDown">
-      <div id="formContent">
-        <h2 className="active"> Sign In </h2>
-        <form onSubmit={handleSubmit}>
+    <div className="contenedor">
+      <div className="card text-center d-grid col-10 mx-auto" >
+        <h2 className="active mb-3"> Inicio de sesion </h2>
+        <form className="d-grid col-6 mx-auto" onSubmit={handleSubmit}>
           <input
             type="text"
             id="login"
-            className="fadeIn second inputs"
+            className="input-group form-control mb-3"
             name="login"
             ref={usernameRef}
             placeholder="username"
@@ -65,21 +65,25 @@ const LoginForm = () => {
           <input
             type="password"
             id="password"
-            className="fadeIn third inputs"
+            className="input-group form-control mb-3"
             name="login"
             ref={passwordRef}
             placeholder="password"
           />
-          <input type="submit" className="fadeIn fourth" value="Log In" />
+          <div className="d-grid col-6 mx-auto">
+            <input type="submit" class="btn btn-primary " value="Log In" />
+          </div>
         </form>
+        <hr />
         {error && <MessageError texto={error}></MessageError>}
-        <div id="formFooter">
-          <Link className="underlineHover" to="/register">
-            Registro?
+        <div className="d-grid col-6 mx-auto">
+          <Link className=" btn btn-success " to="/register">
+            Crear cuenta nueva
           </Link>
         </div>
       </div>
     </div>
+
   );
 };
 

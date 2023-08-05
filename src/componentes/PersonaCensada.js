@@ -27,7 +27,7 @@ export const PersonaCensada = () => {
   const [filteredCities, setFilteredCities] = useState([]);
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [selectedOccupation, setSelectedOccupation] = useState("");
-  
+
   useEffect(() => {
     if (localStorage.getItem("session") === null) {
       window("/");
@@ -115,61 +115,85 @@ export const PersonaCensada = () => {
     countryRef.current.value = "";
   };
   return (
-    <div id="contenedorCensada">
-      <h2 className="active"> Agrega a una persona </h2>
-      <form className="addPerson" onSubmit={handleSubmit}>
-        <input required type="text" placeholder="Nombre" ref={nameRef} />
-        <select required onChange={departamentCambio} ref={countryRef}>
-          <option disabled value="" selected>
-            Seleccione un departamento
-          </option>
-          {countrys.map((cout) => (
-            <option key={cout.id} value={cout.id}>
-              {cout.nombre}
-            </option>
-          ))}
-        </select>
-        <select required ref={cityRef}>
-          <option disabled value="" selected>
-            Selecciona una ciudad
-          </option>
-          {filteredCities.map((city) => (
-            <option key={city.id} value={city.id}>
-              {city.nombre}
-            </option>
-          ))}
-        </select>
-        <input
-          required
-          type="date"
-          placeholder="Fecha nacimiento"
-          onChange={handleDateOfBirthChange}
-          ref={dateRef}
-        />
-        <select
-          required
-          value={selectedOccupation}
-          onChange={handleOccupationChange}
-          ref={jobRef}
-        >
-          <option disabled value="" selected>
-            Selecciona la ocupacion
-          </option>
-          {jobs.map((job) => (
-            <option
-              key={job.id}
-              value={job.id}
-              disabled={
-                calculateAge(dateOfBirth) < 18 && job.ocupacion !== "Estudiante"
-              }
+    <div className="contenedor mt-5">
+      <div className="card text-center d-grid col-10 mx-auto">
+        <h2 className="active mb-5"> Agrega a una persona </h2>
+        <form className="d-grid col-6 mx-auto text-center" onSubmit={handleSubmit}>
+          <input 
+            required 
+            type="text" 
+            placeholder="Nombre" 
+            ref={nameRef}
+            className="input-group form-control mb-3"
+          />
+          <select 
+            required 
+            onChange={departamentCambio} 
+            ref={countryRef}
+            className="form-select mb-3"
             >
-              {job.ocupacion}
+            <option disabled value="" selected>
+              Seleccione un departamento
             </option>
-          ))}
-        </select>
-        <input type="submit" value="Register" />
-      </form>
-      <Toaster />
+            {countrys.map((cout) => (
+              <option key={cout.id} value={cout.id}>
+                {cout.nombre}
+              </option>
+            ))}
+          </select>
+          <select 
+            required 
+            ref={cityRef}
+            className="form-select mb-3"
+            >
+            <option disabled value="" selected>
+              Selecciona una ciudad
+            </option>
+            {filteredCities.map((city) => (
+              <option key={city.id} value={city.id}>
+                {city.nombre}
+              </option>
+            ))}
+          </select>
+          <input
+            required
+            type="date"
+            placeholder="Fecha nacimiento"
+            onChange={handleDateOfBirthChange}
+            ref={dateRef}
+            className="input-group form-control mb-3"
+          />
+          <select
+            required
+            value={selectedOccupation}
+            onChange={handleOccupationChange}
+            ref={jobRef}
+            className="form-select mb-3"
+          >
+            <option disabled value="" selected>
+              Selecciona la ocupacion
+            </option>
+            {jobs.map((job) => (
+              <option
+                key={job.id}
+                value={job.id}
+                disabled={
+                  calculateAge(dateOfBirth) < 18 && job.ocupacion !== "Estudiante"
+                }
+              >
+                {job.ocupacion}
+              </option>
+            ))}
+          </select>
+          <input 
+          type="submit" 
+          value="Register"
+          className="btn btn-success" 
+          />
+        </form>
+        <Toaster />
+      </div>
     </div>
+
   );
 };

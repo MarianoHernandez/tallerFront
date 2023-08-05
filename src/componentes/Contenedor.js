@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
-import { useNavigate, NavLink, Outlet } from "react-router-dom";
-import { FiActivity } from "react-icons/fi";
-import { VscAdd } from "react-icons/vsc";
-import { IoIosList } from "react-icons/io";
-import { BiLogOut } from "react-icons/bi";
-import { BsFillPeopleFill } from "react-icons/bs";
-import logo from "../imagen/logo_censo.png";
+import { useNavigate, Outlet } from "react-router-dom";
 import { savecity } from "../features/citySlice";
 import { savecountry } from "../features/countrySlice";
 import { savejob } from "../features/jobSlice";
 import { useDispatch } from "react-redux";
 import { savepeople } from "../features/peopleSlice";
+import { NavBar } from "./Navbar/NavBar";
 
 export const Contenedor = () => {
   const windows = useNavigate();
@@ -93,52 +88,8 @@ export const Contenedor = () => {
   });
 
   return (
-    <div className="navbar">
-      <ul>
-        <img src={logo} alt="logo"></img>
-        <li>
-          <NavLink
-            className="elementoNav"
-            style={{ color: "white" }}
-            to="/home/analisis"
-          >
-            <FiActivity style={{ color: "white" }} />
-            Analisis
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="elementoNav"
-            style={{ color: "white" }}
-            to="/home/agregarcensada"
-          >
-            <VscAdd style={{ color: "white" }}></VscAdd>Agregar
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="elementoNav"
-            style={{ color: "white" }}
-            to="/home/listado"
-          >
-            <IoIosList></IoIosList>Listado
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="elementoNav"
-            style={{ color: "white" }}
-            to="/home/totales"
-          >
-            <BsFillPeopleFill></BsFillPeopleFill>Total
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="elementoNav" style={{ color: "white" }} to="/">
-            <BiLogOut></BiLogOut>LogOut
-          </NavLink>
-        </li>
-      </ul>
+    <div>
+      <NavBar></NavBar>
       <Outlet></Outlet>
     </div>
   );

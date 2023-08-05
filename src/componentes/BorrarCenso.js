@@ -16,7 +16,7 @@ export const BorrarCenso = () => {
       window("/");
     }
   });
-  
+
   const borrar = (e) => {
     e.preventDefault();
 
@@ -41,17 +41,19 @@ export const BorrarCenso = () => {
       });
   };
   return (
-    <div className="centrarBorrarBody">
-      <div className="borrarBody">
-        <h1 className="borrarTitulo">Seguro desea borrar a la persona?</h1>
-        <div className="botonesBorrar">
+    <div className="card text-center d-grid col-10 mx-auto mt-5">
+        <h1>Seguro desea borrar a la persona?</h1>
+      <div className="row mt-5">
+        <div className="col d-grid">
           <input
             type="button"
-            className="botonBorrar"
+            className="btn btn-danger"
             onClick={borrar}
             value="Borrar"
           ></input>
-          <Link to="/home/listado" className="botonBorrar">
+        </div>
+        <div className="col d-grid">
+          <Link to="/home/listado" className="btn btn-danger">
             Cancelar
           </Link>
         </div>

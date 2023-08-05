@@ -24,9 +24,13 @@ const CuentaRegresiva = () => {
   }, []);
 
   return (
-    <div>
-      Tiempo restante para el final del censo: {tiempoRestante.dias} días, {tiempoRestante.horas} horas y {tiempoRestante.minutos} minutos
+    <div className="d-grid col-8 mx-auto">
+      <div className="card text-center mt-3">
+        Tiempo restante para el final del censo:<br/> 
+        {tiempoRestante.dias} días, {tiempoRestante.horas} horas y {tiempoRestante.minutos} minutos
+      </div>
     </div>
+
   );
 };
 

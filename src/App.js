@@ -11,12 +11,11 @@ import { ListadoPersona } from './componentes/ListadoPersona';
 import { Totales } from './componentes/Totales';
 import { Analisis } from './componentes/Analisis';
 import { BorrarCenso } from './componentes/BorrarCenso';
-//import "./bootstrap.min.css";
+import "./bootstrap.min.css";
 
 
 function App() {
   return (
-    <div className="App">
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
@@ -35,8 +34,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </Provider>
-    </div>
   );
 }
-///<RegisterForm />
 export default App;

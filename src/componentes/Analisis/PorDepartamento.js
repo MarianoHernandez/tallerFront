@@ -29,7 +29,7 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Censo por ciudad',
+            text: 'Censo por departamento',
         },
     },
 };
@@ -49,17 +49,19 @@ export const PorDepartamento = () => {
     });
 
     return (
-        <div>
-            <Bar options={options} data={{
-                labels: cityNames,
-                datasets: [
-                    {
-                        label: 'Personas',
-                        data: peopleCounts,
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    }
-                ],
-            }} />
+        <div style={{ height: "400px", width: "100%" }} className="container card text-center justify-content-center">
+
+        <Bar options={options} data={{
+            labels: cityNames,
+            responsive: true,
+            datasets: [
+                {
+                    label: 'Personas',
+                    data: peopleCounts,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                }
+            ],
+        }} />
         </div>
     )
 }

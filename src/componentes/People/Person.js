@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { AiOutlineDelete } from "react-icons/ai";
+
 
 export const Person = ({
   nombre,
@@ -15,41 +17,45 @@ export const Person = ({
   const citys = useSelector((state) => state.city.citys);
 
   return (
-    <div className="card">
-      <h3 className="card_title">{nombre}</h3>
-      <p className="card_content">
-        Ocupacion:
-        {jobs.map((job) => {
-          if (job.id === ocupacion) {
-            return job.ocupacion;
-          }
-        })}
-      </p>
-      <p className="card_content">
-        Departamento:
-        {countrys.map((country) => {
-          if (country.id === departamento) {
-            return country.nombre;
-          }
-        })}
-      </p>
-      <p className="card_content">
-        Ciudad:
-        {citys.map((city) => {
-          if (city.id === ciudad) {
-            return city.nombre;
-          }
-        })}
-      </p>
-      <div className="card_date">Fecha de nacimiento: {fechaNacimiento}</div>
-      <Link
-        key={id}
-        to="/home/borrarCenso"
-        state={{ id: id }}
-        className="card_arrow"
-      >
-        Borrar
-      </Link>
+    <div className="card d-grid col-8 mx-auto">
+      <div className="row">
+        <div className="col text-start">
+          <div className="card_date">Fecha de nacimiento: {fechaNacimiento}</div>
+          <h3 className="card_name col">{nombre}</h3>
+        </div>
+        <div className="col text-start">
+          Ocupacion: 
+          {jobs.map((job) => {
+            if (job.id === ocupacion) {
+              return job.ocupacion;
+            }
+          })}<br />
+          Departamento: 
+          {countrys.map((country) => {
+            if (country.id === departamento) {
+              return country.nombre;
+            }
+          })}<br />
+          Ciudad: 
+          {citys.map((city) => {
+            if (city.id === ciudad) {
+              return city.nombre;
+            }
+          })}
+        </div>
+        <div className="col-2 justify-content-center ">
+          <Link
+            key={id}
+            to="/home/borrarCenso"
+            state={{ id: id }}
+            className="card_arrow"
+          >
+            <AiOutlineDelete></AiOutlineDelete>
+            Borrar
+          </Link>
+        </div>
+      </div>
+
     </div>
   );
 };

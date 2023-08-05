@@ -15,33 +15,33 @@ export const ListadoPersona = () => {
       const filteredPeople = people.filter((j) => j.ocupacion === +job);
       setFilteredPeople(filteredPeople);
     }
-  }, [job,people]);
+  }, [job, people]);
 
   const handleSelect = (event) => {
     setJob(event.target.value);
   };
   return (
-    <>
-      <div className="allCards">
-        <div>
-          <select onChange={handleSelect}>
-            <option selected value="todos">
-              Mostrar todos
+    <div >
+      <div className="selectList">
+        <select className="form-select" onChange={handleSelect}>
+          <option selected value="todos">
+            Mostrar todos
+          </option>
+          {jobs.map((job) => (
+            <option key={job.id} value={job.id}>
+              {job.ocupacion}
             </option>
-            {jobs.map((job) => (
-              <option key={job.id} value={job.id}>
-                {job.ocupacion}
-              </option>
-            ))}
-          </select>
-        </div>
-        <h1>Todas las personas contenedor</h1>
+          ))}
+        </select>
+      </div>
+      <div className="text-center mt-5">
+        <h1 className="active mb-5">Personas censadas</h1>
         <div>
           {filteredPeople.map((person) => {
             return <Person key={person.id} {...person}></Person>;
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };

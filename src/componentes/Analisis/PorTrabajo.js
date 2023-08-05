@@ -29,7 +29,7 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Censo por ciudad',
+            text: 'Censo por trabajo',
         },
     },
 };
@@ -46,9 +46,11 @@ export const PorTrabajo = () => {
     });
 
     return (
-        <div>
+        <div style={{ height: "400px", width: "100%" }} className="card text-center justify-content-center">
+
             <Bar options={options} data={{
                 labels: jobsNames,
+                responsive: true,
                 datasets: [
                     {
                         label: 'Personas',

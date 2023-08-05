@@ -16,15 +16,15 @@ export const Totales = () => {
     })
   });
   return (
-    <div className="cuerpoTotales">
-      <div className="totalCensados">
+    <div className="card mt-5 text-center d-grid col-10 mx-auto">
+      <div className="card mb-5">
         Cantidad de censados: {people.length}
       </div>
-      <div className="conteinerTotals">
-      <div className="conteinerindividual">
+      <div className="row">
+      <div className="card col">
         Cantidad de censados en Montevideo {people.filter(p => +p.departamento === idMontevideo).length}
       </div>
-      <div className="conteinerindividual">
+      <div className="card col">
         Cantidad de censados en el resto del pais {people.filter(p => +p.departamento !== idMontevideo).length}
       </div>
       </div>

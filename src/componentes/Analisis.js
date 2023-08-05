@@ -14,24 +14,27 @@ export const Analisis = () => {
       window("/");
     }
   });
-  
-  return (
-    <div className='Conteiner'>
-      <div>
 
-        <PorDepartamento></PorDepartamento>
+  return (
+    <div className="container card text-center mt-4">
+      <div className="row  row-cols-2 ">
+        <div className="col-12 col-sm-12 col-md-6 gap-3">
+          <PorDepartamento></PorDepartamento>
+        </div>
+        <div className="col-12 col-sm-12 col-md-6 gap-3">
+          <PorTrabajo></PorTrabajo>
+        </div>
       </div>
-      <div>
-<PorTrabajo></PorTrabajo>
+      <div className="row">
+        <div className="col-md-6 col-sm-12 col-12 gap-3">
+          <Mapa></Mapa>
+        </div>
+        <div className="col-md-6 col-sm-12 col-12 gap-3">
+          <Porcentaje></Porcentaje>
+        </div>
       </div>
-      <div>
-      <CuentaRegresiva></CuentaRegresiva>
-      </div>
-      <div>
-        <Porcentaje></Porcentaje>
-      </div>
-      <div>
-      <Mapa></Mapa>
+      <div className='text-center'>
+        <CuentaRegresiva></CuentaRegresiva>
       </div>
     </div>
   )
