@@ -187,7 +187,7 @@ export const PersonaCensada = () => {
           </select>
           <input 
           type="submit" 
-          value="Register"
+          value="Agregar"
           className="btn btn-success" 
           />
         </form>

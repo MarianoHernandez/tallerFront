@@ -71,7 +71,7 @@ const LoginForm = () => {
             placeholder="password"
           />
           <div className="d-grid col-6 mx-auto">
-            <input type="submit" class="btn btn-primary " value="Log In" />
+            <input type="submit" className="btn btn-primary " value="Log In" />
           </div>
         </form>
         <hr />

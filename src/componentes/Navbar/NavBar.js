@@ -10,11 +10,11 @@ import logo from "../../imagen/logo_censo.png";
 export const NavBar = () => {
     return (
         <div>
-            <ul class="nav justify-content-center nav-fill">
-                <li class="nav-item justify-content-start">
-                    <img class="img-fluid" src={logo} alt="logo"></img>
+            <ul className="nav justify-content-center nav-fill">
+                <li className="nav-item justify-content-start">
+                    <img className="img-fluid" src={logo} alt="logo"></img>
                 </li>
-                <li class="nav-item justify-content-center">
+                <li className="nav-item justify-content-center">
                     <NavLink
                         className="elementoNav justify-content-center"
                         style={{ color: "white" }}
@@ -23,7 +23,7 @@ export const NavBar = () => {
                         <FiActivity style={{ color: "white" }} />
                         Analisis
                     </NavLink>  </li>
-                <li class="nav-item">
+                <li className="nav-item">
                     <NavLink
                         className="elementoNav justify-content-center"
                         style={{ color: "white" }}
@@ -31,7 +31,7 @@ export const NavBar = () => {
                     >
                         <VscAdd style={{ color: "white" }}></VscAdd>Agregar
                     </NavLink>  </li>
-                <li class="nav-item">
+                <li className="nav-item">
                     <NavLink
                         className="elementoNav justify-content-center"
                         style={{ color: "white" }}
@@ -39,7 +39,7 @@ export const NavBar = () => {
                     >
                         <IoIosList></IoIosList>Listado
                     </NavLink>  </li>
-                <li class="nav-item">
+                <li className="nav-item">
                     <NavLink
                         className="elementoNav justify-content-center"
                         style={{ color: "white" }}
@@ -47,7 +47,7 @@ export const NavBar = () => {
                     >
                         <BsFillPeopleFill></BsFillPeopleFill>Total
                     </NavLink>  </li>
-                <li class="nav-item">
+                <li className="nav-item">
                     <NavLink className="elementoNav justify-content-end" style={{ color: "white" }} to="/">
                         <BiLogOut></BiLogOut>LogOut
                     </NavLink>

@@ -78,7 +78,7 @@ const RegisterForm = () => {
           placeholder="password"
         />
         <div className="d-grid col-6 mx-auto">
-          <input type="submit" class="btn btn-primary " value="Regsitro" />
+          <input type="submit" className="btn btn-primary " value="Regsitro" />
         </div>          
       </form>
       <hr></hr>
