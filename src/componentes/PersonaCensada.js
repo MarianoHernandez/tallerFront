@@ -23,10 +23,12 @@ export const PersonaCensada = () => {
   const dateRef = useRef();
   const jobRef = useRef();
 
-  const [idDepartamento, setIdDepartamento] = useState(0);
+  const [idDepartamento, setIdDepartamento] = useState('0');
   const [filteredCities, setFilteredCities] = useState([]);
   const [dateOfBirth, setDateOfBirth] = useState("");
-  const [selectedOccupation, setSelectedOccupation] = useState("");
+  const [selectedOccupation, setSelectedOccupation] = useState("0");
+  const [idCiudad, setIdCiudad] = useState('0');
+
 
   useEffect(() => {
     if (localStorage.getItem("session") === null) {
@@ -36,7 +38,7 @@ export const PersonaCensada = () => {
 
   useEffect(() => {
     const filteredCities = citys.filter(
-      (city) => city.idDepartamento === idDepartamento
+      (city) => city.idDepartamento === +idDepartamento
     );
     setFilteredCities(filteredCities);
   }, [idDepartamento, citys]);
@@ -66,9 +68,14 @@ export const PersonaCensada = () => {
   };
 
   const departamentCambio = (event) => {
-    const selectedDepartmentId = parseInt(event.target.value);
-    setIdDepartamento(selectedDepartmentId);
+    setIdCiudad('0')
+    setIdDepartamento(event.target.value);
   };
+
+  const ciudadCambio = (event) => {
+    setIdCiudad(event.target.value);
+  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,6 +120,10 @@ export const PersonaCensada = () => {
     jobRef.current.value = "";
     cityRef.current.value = "";
     countryRef.current.value = "";
+    setIdCiudad('0')
+    setIdDepartamento('0');
+    setSelectedOccupation('0');
+
   };
   return (
     <div className="contenedor mt-5">
@@ -127,12 +138,13 @@ export const PersonaCensada = () => {
             className="input-group form-control mb-3"
           />
           <select 
-            required 
+            required
+            value={idDepartamento}
             onChange={departamentCambio} 
             ref={countryRef}
             className="form-select mb-3"
             >
-            <option disabled value="" selected>
+            <option disabled value="0">
               Seleccione un departamento
             </option>
             {countrys.map((cout) => (
@@ -144,9 +156,11 @@ export const PersonaCensada = () => {
           <select 
             required 
             ref={cityRef}
+            value={idCiudad}
+            onChange={ciudadCambio} 
             className="form-select mb-3"
             >
-            <option disabled value="" selected>
+            <option disabled value="0">
               Selecciona una ciudad
             </option>
             {filteredCities.map((city) => (
@@ -170,7 +184,7 @@ export const PersonaCensada = () => {
             ref={jobRef}
             className="form-select mb-3"
           >
-            <option disabled value="" selected>
+            <option disabled value="0">
               Selecciona la ocupacion
             </option>
             {jobs.map((job) => (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { savecity } from "../features/citySlice";
 import { savecountry } from "../features/countrySlice";
@@ -11,10 +11,11 @@ export const Contenedor = () => {
   const windows = useNavigate();
   const dispatch = useDispatch();
 
-  const apiKey = localStorage.getItem("session");
-  const id = localStorage.getItem("id");
+  const [apiKey, setApiKey] = useState(localStorage.getItem("session"));
+  const [id, setId] = useState(localStorage.getItem("id"));
+  
 
-  const getCitys = () => {
+  const getCitys = (apiKey,id) => {
     fetch("https://censo.develotion.com/ciudades.php", {
       method: "GET",
       headers: {
@@ -29,7 +30,7 @@ export const Contenedor = () => {
       });
   };
 
-  const getCountry = () => {
+  const getCountry = (apiKey,id) => {
     fetch("https://censo.develotion.com//departamentos.php", {
       method: "GET",
       headers: {
@@ -44,7 +45,7 @@ export const Contenedor = () => {
       });
   };
 
-  const getJobs = () => {
+  const getJobs = (apiKey,id) => {
     fetch("https://censo.develotion.com/ocupaciones.php", {
       method: "GET",
       headers: {
@@ -59,7 +60,7 @@ export const Contenedor = () => {
       });
   };
 
-  const getPeople = () => {
+  const getPeople = (apiKey,id) => {
     const url = `https://censo.develotion.com/personas.php?idUsuario=${id}`;
     fetch(url, {
       method: "GET",
@@ -79,10 +80,13 @@ export const Contenedor = () => {
     if (localStorage.getItem("session") === null) {
       windows("/");
     } else {
-      getCitys();
-      getCountry();
-      getJobs();
-      getPeople();
+      setApiKey(localStorage.getItem("session"))
+      setId(localStorage.getItem("id"))
+
+      getCitys(apiKey,id);
+      getCountry(apiKey,id);
+      getJobs(apiKey,id);
+      getPeople(apiKey,id);
 
     }
   });

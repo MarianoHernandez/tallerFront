@@ -12,6 +12,7 @@ import { Totales } from './componentes/Totales';
 import { Analisis } from './componentes/Analisis';
 import { BorrarCenso } from './componentes/BorrarCenso';
 import "./bootstrap.min.css";
+import { Home } from './componentes/Home';
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
               <Route path="/register" element={<RegisterForm />}></Route>
               <Route path="/logout"></Route>
               <Route path='/home' element={<Contenedor />}>
+              <Route path='/home' element={<Home/>} ></Route>
+
                 <Route path='/home/analisis' element={<Analisis/>} ></Route>
                 <Route path='/home/agregarcensada' element={<PersonaCensada/>} ></Route>
                 <Route path='/home/listado' element={<ListadoPersona/>} ></Route>

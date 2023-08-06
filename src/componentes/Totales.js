@@ -9,6 +9,13 @@ export const Totales = () => {
   const [idMontevideo, setidMontevideo] = useState(0);
  
   useEffect(() => {
+    if (localStorage.getItem("session") === null) {
+      window("/");
+    }
+  });
+
+
+  useEffect(() => {
     countrys.map(country => {
       if(country.nombre === 'Montevideo'){
         setidMontevideo(country.id)

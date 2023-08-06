@@ -20,7 +20,7 @@ export const Person = ({
     <div className="card d-grid col-8 mx-auto">
       <div className="row">
         <div className="col text-start">
-          <div className="card_date">Fecha de nacimiento: {fechaNacimiento}</div>
+          <div className="card_date">Nacimiento: {fechaNacimiento}</div>
           <h3 className="card_name col">{nombre}</h3>
         </div>
         <div className="col text-start">

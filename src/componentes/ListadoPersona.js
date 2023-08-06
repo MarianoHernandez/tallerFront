@@ -7,7 +7,6 @@ export const ListadoPersona = () => {
   const jobs = useSelector((state) => state.job.jobs);
   const [job, setJob] = useState("todos");
   const [filteredPeople, setFilteredPeople] = useState([]);
-
   useEffect(() => {
     if (job === "todos") {
       setFilteredPeople(people);
@@ -23,8 +22,8 @@ export const ListadoPersona = () => {
   return (
     <div >
       <div className="selectList">
-        <select className="form-select" onChange={handleSelect}>
-          <option selected value="todos">
+        <select className="form-select" value={job} onChange={handleSelect}>
+          <option value="todos">
             Mostrar todos
           </option>
           {jobs.map((job) => (
